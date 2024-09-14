@@ -1,0 +1,236 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: "Playfair Display", serif; /* Elegant, vintage font */
+  background-color: #f2e7d5;
+  background-image: url("bg.webp"); /* Use the generated texture */
+  background-repeat: repeat; /* Infinite repeating background */
+  background-size: cover; /* Ensure it covers the entire background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Page Container */
+.page-container {
+  padding: 40px;
+  width: 90%; /* Adjusted for better responsiveness */
+  max-width: 1200px; /* Added max-width for large screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Polaroid Container */
+.polaroid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Increased gap for better spacing */
+}
+
+/* Individual Polaroid Style */
+.polaroid {
+  background: #fff;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  border-radius: 2px; /* Rounded corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  transform: rotate(5deg);
+  z-index: 1;
+  font-family: "Playfair Display", serif; /* Vintage font for polaroid text */
+}
+
+/* Dynamic Rotations for Each Polaroid */
+.polaroid:nth-child(odd) {
+  transform: rotate(-5deg);
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(5deg);
+}
+
+/* Polaroid Hover Effect */
+.polaroid:hover {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+
+/* Polaroid Image */
+.polaroid img {
+  width: 100%;
+  height: auto;
+  max-height: 200px; /* Slightly larger max-height */
+  display: block;
+  border-radius: 2px; /* Rounded corners for images */
+  margin-bottom: 10px;
+}
+
+/* Caption and Date */
+.caption {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.date {
+  font-size: 1rem; /* Smaller font size for dates */
+  color: #666; /* Lighter color for dates */
+  margin: 5px 0;
+}
+
+/* Icon Group Container */
+.icon-group {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.delete-btn {
+  font-size: 1.4rem; /* Slightly larger for better visibility */
+  color: #ff6347;
+  cursor: pointer;
+}
+
+.polaroid:hover .icon-group {
+  opacity: 1;
+}
+
+/* Remove border while editing (focused) */
+.caption:focus,
+.date:focus {
+  outline: none;
+  border: none;
+}
+
+/* Input group for icons */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  color: #555;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+  font-size: 1rem; /* Adjust font size for consistency */
+}
+
+.file-upload-label:hover {
+  background-color: #e2e2e2;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+input[type="text"],
+.date-input {
+  padding: 12px;
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+.date-input:focus {
+  border-color: #888;
+}
+
+button[type="submit"] {
+  padding: 12px 24px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #ff2e12;
+}
+
+/* Popup Modal */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8); /* Add scaling animation */
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  padding: 30px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border-radius: 10px;
+  opacity: 0;
+  animation: popupFadeIn 0.4s ease-out forwards; /* Fade-in animation */
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes popupFadeIn {
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #555;
+}
+
+/* File Upload Label Success */
+.file-upload-success {
+  color: #4caf50; /* Green color for success */
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
